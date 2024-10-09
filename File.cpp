@@ -81,13 +81,14 @@ File::File(const std::string& filename, const std::string& contents, int* icon) 
             throw InvalidFormatException("Invalid file name: " + filename);
          }
       }
+      filename_ = filename;
    }
    //if we have more than one period this is an invalid file Name
    else{
       throw InvalidFormatException("Invalid file name: " + filename);
    }
-
-   //check if the contents name is good
-
+   //nothing has to be done for the contents 
    //check icon is good
+   icon_ = new int [ICON_DIM];
+   icon_ = icon;
 }
