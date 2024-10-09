@@ -83,7 +83,7 @@ class File {
        * @brief (COPY CONSTRUCTOR) Constructs a new File object as a deep copy of the target File
        * @param rhs A const reference to the file to be copied from
        */
-
+      File(const File& other);
       /**
        * @brief (COPY ASSIGNMENT) Replaces the calling File's data members using a deep copy of the rhs File.
        * 

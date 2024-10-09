@@ -101,3 +101,12 @@ std::size_t File::getSize() const{
 
    return fileSize_;
 }
+
+//copy constructor
+File::File(const File& other) : filename_{other.filename_}, contents_{other.contents_}{
+   icon_ = new int[ICON_DIM];
+   for(int i = 0; i < ICON_DIM; i++){
+      icon_[i] = other.icon_[i];
+   }
+}
+
