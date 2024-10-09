@@ -56,7 +56,7 @@ File::File(const std::string& filename, const std::string& contents, int* icon) 
       //if the character we are on is not an alphanumeric we go in this if statement 
       if( !std::isalnum(*it)){
          // if the character is a period we have reached the extension part
-         if( *it == "."){
+         if( *it == '.'){
             //we have reached the extension
             //raise a counter saying we have our "." 1
             periodFound_++;
@@ -83,7 +83,7 @@ File::File(const std::string& filename, const std::string& contents, int* icon) 
       }
    }
    //if we have more than one period this is an invalid file Name
-   else( periodFound_ > 1){
+   else{
       throw InvalidFormatException("Invalid file name: " + filename);
    }
 
