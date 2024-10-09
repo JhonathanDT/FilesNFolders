@@ -2,6 +2,7 @@
 
 #include "InvalidFormatException.hpp"
 #include <cctype>
+#include <iterator>
 
 class File {
    private:
