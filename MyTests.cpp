@@ -3,9 +3,7 @@
 #include "File.hpp"
 
 int main(){
-    int num = 5;
-    int* numptr = &num;
-    File("jpeg.mafia", "songs written for the album", numptr);
-    File();
+  File a ("jpeg.mafia" , "hello there");
+   std::cout << a << std::endl;
 
 }

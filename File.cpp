@@ -21,12 +21,12 @@ void File::setIcon(int* new_icon) {
    icon_ = new_icon;
 } 
 
-// std::ostream& operator<< (std::ostream& os, const File& target) {
-//    os << "Name: " << target.getName() << std::endl;
-//    os << "Size: " << target.getSize() << " bytes" << std::endl;
-//    os << "Contents: " << target.getContents(); 
-//    return os;
-// }
+std::ostream& operator<< (std::ostream& os, const File& target) {
+   os << "Name: " << target.getName() << std::endl;
+   os << "Size: " << target.getSize() << " bytes" << std::endl;
+   os << "Contents: " << target.getContents(); 
+   return os;
+}
 
 bool File::operator<(const File& rhs) const {
    return getName() < rhs.getName();
@@ -91,6 +91,8 @@ File::File(const std::string& filename, const std::string& contents, int* icon) 
    //check icon is good
    icon_ = new int [ICON_DIM];
    icon_ = icon;
+
+   contents_ = contents;
 }
 
 std::size_t File::getSize() const{
