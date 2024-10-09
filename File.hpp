@@ -1,6 +1,7 @@
 #pragma once
 
 #include "InvalidFormatException.hpp"
+#include <cctype>
 
 class File {
    private:
@@ -68,13 +69,14 @@ class File {
       * @note You'll notice we provide a default value for the first possible argument (filename)
       *       Yes, this means we can define override the default constructor and define a parameterized one simultaneously.
       */
+      File(const std::string& filename = "NewFile.txt" ,const std::string& contents = "", int* icon = nullptr);
 
       /**
       * @brief Calculates and returns the size of the File Object (IN BYTES), using .size()
       * @return size_t The number of bytes the File's contents consumes
       * @note Consider this: how does this relate to the string's length? Why is that the case?
       */
-      getSize
+      // getSize
 
       /**
        * @brief (COPY CONSTRUCTOR) Constructs a new File object as a deep copy of the target File
