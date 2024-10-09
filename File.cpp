@@ -92,3 +92,10 @@ File::File(const std::string& filename, const std::string& contents, int* icon) 
    icon_ = new int [ICON_DIM];
    icon_ = icon;
 }
+
+std::size_t File::getSize() const{
+   //each char has the size of 1 byte so using .size on contents_ + 1 (for the terminator ) = the size in bytes
+   size_t fileSize_ = contents_.size() + 1;
+
+   return fileSize_;
+}

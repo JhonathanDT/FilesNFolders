@@ -77,7 +77,7 @@ class File {
       * @return size_t The number of bytes the File's contents consumes
       * @note Consider this: how does this relate to the string's length? Why is that the case?
       */
-      // getSize
+      std::size_t getSize() const;
 
       /**
        * @brief (COPY CONSTRUCTOR) Constructs a new File object as a deep copy of the target File
