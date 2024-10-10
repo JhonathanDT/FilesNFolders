@@ -110,3 +110,17 @@ File::File(const File& other) : filename_{other.filename_}, contents_{other.cont
    }
 }
 
+File& File::operator=( const File& other){
+   //if the File object we are copying is not the same object we have right now 
+   // delete the current data and deep copy the data from the other 
+   if(this != &other) {
+      delete[] icon_;
+      filename_ = other.filename_;
+      contents_ = other.contents_;
+      icon_ = new int[ICON_DIM];
+      for(int i =0; i < ICON_DIM; i++){
+         icon_[i] = other.icon_[i];
+      }
+   }
+   return *this;
+}

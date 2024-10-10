@@ -91,7 +91,7 @@ class File {
        * @return A reference to the new File copy
        * @note If copy assignment operator is invoked upon itself, do nothing.
        */
-      
+      File& operator=(const File& other);
 
       /**
        * @brief (MOVE CONSTRUCTOR) Construct a new File object by moving the data from the righthand side File Object
