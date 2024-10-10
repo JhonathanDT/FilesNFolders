@@ -117,4 +117,5 @@ class File {
        * @brief (DESTRUCTOR) Routine for object deletion
        * @post All dynamically allocated memory is released
        */
+       ~File();
 };

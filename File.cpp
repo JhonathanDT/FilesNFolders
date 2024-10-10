@@ -142,3 +142,7 @@ File& File::operator=(File&& other){
    }
    return *this;
 }
+
+File::~File() { 
+   delete[] icon_;
+}
