@@ -124,3 +124,8 @@ File& File::operator=( const File& other){
    }
    return *this;
 }
+
+File::File(File&& other) : filename_{other.filename_}, contents_{other.contents_} {
+   other.icon_ = nullptr;
+   
+}

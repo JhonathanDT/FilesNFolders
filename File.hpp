@@ -100,7 +100,7 @@ class File {
        *    - All string members are themselves moved.
        *    - ALl pointers are set to nullptr
        */
-
+        File(File&& other); 
       /**
        * @brief (MOVE ASSIGNMENT) Move the rhs data to the calling file object
        * 
