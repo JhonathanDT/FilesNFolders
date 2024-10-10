@@ -58,6 +58,7 @@ class Folder {
       * @return size_t The total size of all child files
       */
    //   getSize
+      size_t getSize();
       
       /**
       * @brief Appends the given file to the files_ vector using move_semantics on the parameter File object, if a file with the same name does not exist within the files_ vector
@@ -96,7 +97,7 @@ class Folder {
       /**
          * @brief Copies a file within the current folder to the destination folder.
          * If there is already an object with the same name in the destination folder, 
-         *    or the object with the specified name does not exist, do nothing.                                                                                                                                                                                                                                                       
+         *    or the object with the specified name does not exist, do nothing.                                                                                       
          * Otherwise, if there exists a file with the given name from the source folder, 
          *    use the copy constructor or assignment operations to create a deep copy of the 
          *    the file into the destination.

@@ -71,3 +71,23 @@ void Folder::display() {
 //             (unless you want your work to be tested incorrectly)
 //    That also means includes. Remember, all other includes go in .hpp
 // =========================== YOUR CODE HERE ===========================
+/**
+ * @brief Iterate through the files vector, calculating the total size of all child files
+ * 
+ * @return size_t The total size of all child files
+ */
+size_t Folder::getSize(){
+   size_t totalSize_ = 0;
+   //if the vector files_ has 0 files return 0
+   if( files_.size() == 0){
+      return 0; 
+   }
+   //use a loop & iterator to access each an every file in the folder
+   else {
+      for( auto it = files_.begin(); it != files_.end(); ++it){
+         //get the size of each file and add it to the total size of this folder
+         totalSize_ += it->getSize();
+      }
+   }
+   return totalSize_;
+}
