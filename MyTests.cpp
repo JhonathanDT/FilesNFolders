@@ -3,7 +3,7 @@
 #include "File.hpp"
 
 int main(){
-  File a ("jpeg.mafia" , "hello there");
+  File a ("jpegmafia." , "hello there");
    std::cout << a << std::endl;
 
 }

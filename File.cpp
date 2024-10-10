@@ -44,6 +44,7 @@ bool File::operator<(const File& rhs) const {
 // =========================== YOUR CODE HERE ===========================
 File::File(const std::string& filename, const std::string& contents, int* icon) : filename_("NewFile.txt"), contents_(""), icon_(nullptr){
 
+   if(filename.empty()) { return; }
     //we can not have the first character in the filename be a period
    if( filename[0] == '.'){
       throw InvalidFormatException("Invalid file name: " + filename);
@@ -73,6 +74,10 @@ File::File(const std::string& filename, const std::string& contents, int* icon) 
    // if no period was found add ".txt" to the end 
    if(periodFound_ == 0){
       filename_ = filename + ".txt";
+   }
+   // if the last character in filename is a '.' add txt to the end
+   else if( periodFound_ == 1 && (filename.substr( filename.length() - 1 )  == ".") ){
+      filename_ = filename + "txt";
    }
    else if( periodFound_ == 1){
       //run through the remaining string to see if it is alnum
