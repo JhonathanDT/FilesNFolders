@@ -127,5 +127,18 @@ File& File::operator=( const File& other){
 
 File::File(File&& other) : filename_{other.filename_}, contents_{other.contents_} {
    other.icon_ = nullptr;
-   
+
+}
+
+File& File::operator=(File&& other){
+   //if the object being moved is not the same then 
+   //delete the current data and shallow copy the data from the other
+   if(this != &other) {
+      delete[] icon_;
+      filename_ = other.filename_;
+      contents_ = other.contents_;
+      icon_ = other.icon_;
+      other.icon_ = nullptr;
+   }
+   return *this;
 }

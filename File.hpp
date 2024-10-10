@@ -111,7 +111,7 @@ class File {
        *    - ALl pointers are set to nullptr
        * @note If move assignment operator is invoked upon itself, do nothing.
        */
-
+      File& operator=(File&& other);
       
       /**
        * @brief (DESTRUCTOR) Routine for object deletion
