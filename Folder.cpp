@@ -91,3 +91,26 @@ size_t Folder::getSize(){
    }
    return totalSize_;
 }
+
+/**
+      * @brief Appends the given file to the files_ vector using move_semantics on the parameter File object, if a file with the same name does not exist within the files_ vector
+       *    (HINT!) Consider push_back(). What happens when we give it an l-value vs. an r-value? Does it change anything?
+       * 
+       * @param new_file A reference to a File object to be added. If the name of the File object is empty (ie. its contents have been taken via move) the add fails  
+       * @return True if the file was added successfully. False otherwise.
+       * @post If the file was added, leaves the parameter File object in a valid but unspecified state
+       */
+bool Folder::addFile (File& new_file){
+   //we would need to use move constructor
+   //we will use move because it lets us "create a file" in the vector and that file created will be just the like the "new_file" File that we are being given. 
+   
+   //check if a file with the same name as 'new file' exists inside the vector
+   for( auto it = files_.begin(); it != files_.end(); ++it) {
+      if( it->getName() == new_file.getName()){
+         return false;
+      }
+   }
+      // the new_file file does not exist in the vector
+   files_.push_back( std::move(new_file) );
+   return true;
+}

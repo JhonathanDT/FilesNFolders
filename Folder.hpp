@@ -69,7 +69,7 @@ class Folder {
        * @post If the file was added, leaves the parameter File object in a valid but unspecified state
        */
       // addFile
-
+      bool addFile (File& new_file);
       /**
        * @brief Searches for a file within the files_ vector to be deleted.
        * If a file object with a matching name is found, erase it from the vector in linear [O(N)] time or better.
