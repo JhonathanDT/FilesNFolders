@@ -132,3 +132,33 @@ bool Folder::removeFile(const std::string& filename){
    }
    return false;
 }
+/**
+       * @brief Moves a file from the current folder to a specified folder 
+       * If a matching name is found, use move semantics to move the object from the current directory to the file vector within the destination folder'
+       *    and erase it from the current folder. 
+       * If a matching name is not found within the source folder or an object with the same name already exists within the 
+       *    destination folder, nothing is moved.
+       * If the source folder and destination folders are the same, the move is always considered successful.
+       * 
+       * @param name The name of the file to be moved, as a const reference to a string
+       * @param destination The target folder to be moved to, as a reference to a Folder object
+       * @return True if the file was moved successfully. False otherwise.
+       */
+      bool moveFileTo (const std::string& fileName, Folder& destination){
+         //if the source folder and the destination folders are the same, the move is always considered true
+         if( this == destination){return true;}
+         //if a matching name is not found within the source folder or an object with the same name already exists within the destination folder, nothing is moved, return false
+         auto it = std::find(files_.begin(), files_.end(), filename);
+         bool movingWorked_ = true;
+         if( (it == files_.end() )  ){
+            return false;
+         }
+         else{
+            // a matching name is found, use move semantics to move the object from the current directory to the file vector within the destination folder
+           
+            movingWorked_ = destination.addFile( it); 
+            this.removeFile(it);
+         }
+
+         return movingWorked_;
+      }

@@ -92,7 +92,7 @@ class Folder {
        * @param destination The target folder to be moved to, as a reference to a Folder object
        * @return True if the file was moved successfully. False otherwise.
        */
-      // moveFileTo
+      bool moveFileTo (const std::string& fileName, Folder& destination);
 
       /**
          * @brief Copies a file within the current folder to the destination folder.
