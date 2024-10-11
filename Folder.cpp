@@ -102,8 +102,7 @@ size_t Folder::getSize(){
        */
 bool Folder::addFile (File& new_file){
    //we would need to use move constructor
-   //we will use move because it lets us "create a file" in the vector and that file created will be just the like the "new_file" File that we are being given. 
-   
+   //we will use move because it lets us "create a file" in the vector and that file created will be just the like the "new_file" File that we are being given.    
    //check if a file with the same name as 'new file' exists inside the vector
    for( auto it = files_.begin(); it != files_.end(); ++it) {
       if( it->getName() == new_file.getName()){
@@ -124,11 +123,11 @@ bool Folder::addFile (File& new_file){
        */
 bool Folder::removeFile(const std::string& filename){
    //use loop to iterate through the files_ vector 
-   auto it = std::find(files_.begin(), files_.end(), filename);
-   
-   if( it != files_.end()){
-      files_.erase(it);
-      return true;
+   for(auto it = files_.begin(); it != files_.end(); ++it){
+      if( it->getName() == filename){
+         files_.erase(it);
+         return true;
+      }
    }
    return false;
 }
@@ -144,21 +143,56 @@ bool Folder::removeFile(const std::string& filename){
        * @param destination The target folder to be moved to, as a reference to a Folder object
        * @return True if the file was moved successfully. False otherwise.
        */
-      bool moveFileTo (const std::string& fileName, Folder& destination){
-         //if the source folder and the destination folders are the same, the move is always considered true
-         if( this == destination){return true;}
-         //if a matching name is not found within the source folder or an object with the same name already exists within the destination folder, nothing is moved, return false
-         auto it = std::find(files_.begin(), files_.end(), filename);
-         bool movingWorked_ = true;
-         if( (it == files_.end() )  ){
-            return false;
+       bool Folder::moveFileTo (const std::string& fileName, Folder& destination){
+         if( this == &destination){return true;}
+         bool inSource_ = false;
+         
+         auto fileInSource_ = files_.end();
+         for( auto it = files_.begin(); it != files_.end(); ++it){
+            if( it->getName() == fileName){
+               inSource_ = true;
+               fileInSource_ = it;
+            }
          }
+         if( !inSource_){return false;}
          else{
-            // a matching name is found, use move semantics to move the object from the current directory to the file vector within the destination folder
-           
-            movingWorked_ = destination.addFile( it); 
-            this.removeFile(it);
+            bool inDestination_ = false;
+            for( auto it = destination.files_.begin(); it != destination.files_.end(); ++it){
+               if( it->getName() == fileName){
+                  inDestination_ =true;
+               }
+            }
+            if( inDestination_){ return false;}
+            //object exists in the source file and the object is not in the destination file
+            else{
+               
+               // fileInSource_ represents the file, so we contain the file the we want to move from this files_ vector so now move it to the destination files_ vector
+               destination.files_.push_back( *fileInSource_ );
+               files_.erase(fileInSource_);
+               return true;
+            }
          }
 
-         return movingWorked_;
+         return false;
       }
+      /**
+      //    * @brief Copies a file within the current folder to the destination folder.
+      //    * If there is already an object with the same name in the destination folder, 
+      //    *    or the object with the specified name does not exist, do nothing.                                                                                       
+      //    * Otherwise, if there exists a file with the given name from the source folder, 
+      //    *    use the copy constructor or assignment operations to create a deep copy of the 
+      //    *    the file into the destination.
+      //    * 
+      //    * @param name The name of the copied object, as a const string reference
+      //    * @param destination The destination folder, as a reference to a Folder object
+      //    * @return True if the file was copied successfully. False otherwise.
+      //    */
+      //   bool Folder::copyFileTo(const std::string& name, Folder& destination ){
+         
+      //    //if there is already an object with the same name in the destination folder or the object with the specified name does not exist
+      //    if( (!std::find(files_.begin(), files_.end(), name)) || (std::find(destination->files_.begin(), destination->files_.end(), name) ) ){
+      //       // do nothing 
+      //       return false;
+      //    }
+            
+      //   }
