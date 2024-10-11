@@ -114,3 +114,21 @@ bool Folder::addFile (File& new_file){
    files_.push_back( std::move(new_file) );
    return true;
 }
+/**
+       * @brief Searches for a file within the files_ vector to be deleted.
+       * If a file object with a matching name is found, erase it from the vector in linear [O(N)] time or better.
+       * Order does not matter.
+       * 
+       * @param name A const reference to a string representing the filename to be deleted
+       * @return True if the file was found & successfully deleted. 
+       */
+bool Folder::removeFile(const std::string& filename){
+   //use loop to iterate through the files_ vector 
+   auto it = std::find(files_.begin(), files_.end(), filename);
+   
+   if( it != files_.end()){
+      files_.erase(it);
+      return true;
+   }
+   return false;
+}

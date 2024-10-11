@@ -78,7 +78,7 @@ class Folder {
        * @param name A const reference to a string representing the filename to be deleted
        * @return True if the file was found & successfully deleted. 
        */
-      // removeFile
+      bool removeFile(const std::string& filename);
 
       /**
        * @brief Moves a file from the current folder to a specified folder 
