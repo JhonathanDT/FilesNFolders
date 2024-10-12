@@ -167,7 +167,7 @@ bool Folder::removeFile(const std::string& filename){
             else{
                
                // fileInSource_ represents the file, so we contain the file the we want to move from this files_ vector so now move it to the destination files_ vector
-               destination.files_.push_back( *fileInSource_ );
+               destination.files_.push_back( std::move(*fileInSource_) );
                files_.erase(fileInSource_);
                return true;
             }
@@ -187,12 +187,37 @@ bool Folder::removeFile(const std::string& filename){
       //    * @param destination The destination folder, as a reference to a Folder object
       //    * @return True if the file was copied successfully. False otherwise.
       //    */
-      //   bool Folder::copyFileTo(const std::string& name, Folder& destination ){
+        bool Folder::copyFileTo(const std::string& name, Folder& destination ){
          
-      //    //if there is already an object with the same name in the destination folder or the object with the specified name does not exist
-      //    if( (!std::find(files_.begin(), files_.end(), name)) || (std::find(destination->files_.begin(), destination->files_.end(), name) ) ){
-      //       // do nothing 
-      //       return false;
-      //    }
+         if( this == &destination){return true;}
+         bool inSource_ = false;
+         
+         auto fileInSource_ = files_.end();
+         for( auto it = files_.begin(); it != files_.end(); ++it){
+            if( it->getName() == name){
+               inSource_ = true;
+               fileInSource_ = it;
+            }
+         }
+         if( !inSource_){return false;}
+         else{
+            bool inDestination_ = false;
+            for( auto it = destination.files_.begin(); it != destination.files_.end(); ++it){
+               if( it->getName() == name){
+                  inDestination_ =true;
+               }
+            }
+            if( inDestination_){ return false;}
+            //object exists in the source file and the object is not in the destination file
+            else{
+               
+               // fileInSource_ represents the file, so we contain the file the we want to move from this files_ vector so now move it to the destination files_ vector
+               destination.files_.push_back( *fileInSource_ );
+               files_.erase(fileInSource_);
+               return true;
+            }
+         }
+
+         return false;
             
-      //   }
+        }
