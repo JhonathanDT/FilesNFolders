@@ -7,7 +7,6 @@ int main(){
   int* aptr; //static memory
   //create an array using dynamic memory allocation
   aptr = new int[size];
-
   //populating the array
   for(int i = 0; i < size; i++){
     aptr[i] = i+5;
