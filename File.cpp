@@ -55,7 +55,7 @@ bool File::operator<(const File& rhs) const {
       * @throws InvalidFormatException - An error that occurs if the filename is not valid by the above constraints.
       * @note You'll notice we provide a default value for the first possible argument (filename)
       *       Yes, this means we can define override the default constructor and define a parameterized one simultaneously.
-      */
+  */
 File::File(const std::string& filename, const std::string& contents, int* icon) : filename_("NewFile.txt"), contents_(""), icon_(nullptr){
 
    //nothing has to be done for the contents 
@@ -103,7 +103,7 @@ File::File(const std::string& filename, const std::string& contents, int* icon) 
          }
       }
       filename_ = filename;
-      std::cout << "only one . was found and alnum was good after that 1 period" << std::endl;
+      
    }
    else{
       filename_ = filename + ".txt";
@@ -112,8 +112,7 @@ File::File(const std::string& filename, const std::string& contents, int* icon) 
    if( filename_.find('.') == filename_.length()-1){
       filename_ += "txt";
    }
-
-   std::cout<< "constructor invoked" <<std::endl;
+   // std::cout<< "constructor invoked" <<std::endl;
 }
 
 std::size_t File::getSize() const{
@@ -128,7 +127,7 @@ File::File(const File& other) : filename_{other.filename_}, contents_{other.cont
    for(int i = 0; i < ICON_DIM; i++){
       icon_[i] = other.icon_[i];
    }
-   std::cout<< "Copy constructor invoked" << std::endl; 
+   // std::cout<< "Copy constructor invoked" << std::endl; 
 }
 
 File& File::operator=( const File& other){
@@ -144,15 +143,17 @@ File& File::operator=( const File& other){
          icon_[i] = other.icon_[i];
       }
    }
-   std::cout << "Copy assignment operator invoked" << std::endl;
+   // std::cout << "Copy assignment operator invoked" << std::endl;
    return *this;
 }
 
 File::File(File&& other) : filename_{other.filename_}, contents_{other.contents_} {
+   icon_ = nullptr;
+   setIcon( other.icon_);
    other.icon_ = nullptr;
    other.filename_ = "";
    other.contents_ = "";
-   std::cout << "Move constructor invoked" <<std::endl;
+   // std::cout << "Move constructor invoked" <<std::endl;
 }
 
 File& File::operator=(File&& other){
@@ -162,15 +163,18 @@ File& File::operator=(File&& other){
       delete[] icon_;
       filename_ = other.filename_;
       contents_ = other.contents_;
-      icon_ = other.icon_;
+      icon_ = nullptr;
+      setIcon( other.icon_);
       other.icon_ = nullptr;
+      other.filename_ = "";
+      other.contents_ = "";
    }
-   std::cout << "Move assignment operator invoked" << std::endl;
+   // std::cout << "Move assignment operator invoked" << std::endl;
    return *this;
 }
 
 File::~File() { 
    delete[] icon_;
    icon_ = nullptr;
-   std::cout << "destructor invoked"<<std::endl;
+   // std::cout << "destructor invoked"<<std::endl;
 }
