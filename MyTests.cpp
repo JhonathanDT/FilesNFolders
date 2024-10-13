@@ -75,14 +75,44 @@ int main(){
   File likeC ("jpeg.txt" , "i am perfect"); 
   File g ("hello.txt" , "i got no name", bptr);
   File e ("Empty.contents" , ""); 
-  Folder first ( "HoldsEverything");
-  // first.display();
+  Folder first ( "first");
+  /* addFile() WORKS!!*/
   first.addFile(c);
   first.addFile(g);
   first.addFile(e);
-  std::cout<< "the size of the first folder should be 3 since it has 3 files; it is:" << first.getSize() << std::endl;
+  /* getSize() WORKS!!*/
+  // std::cout << first.getSize() << std::endl;
   
-  // first.addFile(e);
+  /* removeFile() WORKS!!*/
   // first.display();
+  first.removeFile("txt.hello");
+  // first.display();
+  first.removeFile("hello.txt");
+  // first.display();
+  first.removeFile("hello.txt");
+  // first.display();
+  
+
+  /* moveTo()  IT WORKS!!*/
+  /*
+  Folder second( "second");
+  File cutie( "sabrina.carpenter");
+  second.addFile(cutie);
+  File cutie2( "sabrina.carpenter");
+  first.addFile(cutie2 );
+  first.moveFileTo("" , second);
+  */
+
+/* copyTo() */
+  Folder second( "second");   
+  File cutie( "sabrina.carpenter");
+  second.addFile(cutie);
+  File cutie2( "sabrina.carpenter");
+  first.addFile(cutie2 );
+  first.display();
+  second.display();
+  first.copyFileTo("Empty.contents" , second);
+  first.display();
+  second.display();
 
 }

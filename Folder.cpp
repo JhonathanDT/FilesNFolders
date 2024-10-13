@@ -80,7 +80,7 @@ size_t Folder::getSize(){
    size_t totalSize_ = 0;
    //if the vector files_ has 0 files return 0
    if( files_.size() == 0){
-      return 0; 
+      return totalSize_; 
    }
    //use a loop & iterator to access each an every file in the folder
    else {
@@ -148,17 +148,28 @@ bool Folder::removeFile(const std::string& filename){
        * @return True if the file was moved successfully. False otherwise.
        */
        bool Folder::moveFileTo (const std::string& fileName, Folder& destination){
-         if( this == &destination){return true;}
+
+        if( fileName == ""){
+            // std::cout<< "the file is empty"<<std::endl;
+            return false;
+        }
+         if( this == &destination){
+            // std::cout<< "silly billy these are the same folder"<<std::endl;
+            return true;
+            }
          bool inSource_ = false;
-         
+        //check if the file is in our source folder
          auto fileInSource_ = files_.end();
          for( auto it = files_.begin(); it != files_.end(); ++it){
             if( it->getName() == fileName){
+            //    std::cout<< "we found the file you are trying to move"<<std::endl;
                inSource_ = true;
                fileInSource_ = it;
             }
          }
-         if( !inSource_){return false;}
+         if( !inSource_){
+            // std::cout<< "the file "<< fileName << " is not in the source folder"<<std::endl;
+            return false;}
          else{
             bool inDestination_ = false;
             for( auto it = destination.files_.begin(); it != destination.files_.end(); ++it){
@@ -166,7 +177,9 @@ bool Folder::removeFile(const std::string& filename){
                   inDestination_ =true;
                }
             }
-            if( inDestination_){ return false;}
+            if( inDestination_){
+                // std::cout<< "the file "<< fileName << " is already in the destination folder" <<std::endl; 
+                return false;}
             //object exists in the source file and the object is not in the destination file
             else{
                
@@ -193,35 +206,55 @@ bool Folder::removeFile(const std::string& filename){
       //    */
         bool Folder::copyFileTo(const std::string& name, Folder& destination ){
          
-         if( this == &destination){return true;}
-         bool inSource_ = false;
-         
-         auto fileInSource_ = files_.end();
-         for( auto it = files_.begin(); it != files_.end(); ++it){
-            if( it->getName() == name){
-               inSource_ = true;
-               fileInSource_ = it;
-            }
-         }
-         if( !inSource_){return false;}
-         else{
-            bool inDestination_ = false;
-            for( auto it = destination.files_.begin(); it != destination.files_.end(); ++it){
-               if( it->getName() == name){
-                  inDestination_ =true;
-               }
-            }
-            if( inDestination_){ return false;}
-            //object exists in the source file and the object is not in the destination file
-            else{
-               
-               // fileInSource_ represents the file, so we contain the file the we want to move from this files_ vector so now move it to the destination files_ vector
-               destination.files_.push_back( *fileInSource_ );
-               files_.erase(fileInSource_);
-               return true;
-            }
+         if( name == ""){
+            std::cout<< "the file name is empty"<<std::endl;
+            return false;
          }
 
-         return false;
+         if( this == &destination){
+            std::cout<< "silly the destination is the same as the main folder"<<std::endl;
+            return false;
+        }
+
+         bool inSource_ = false;
+
+        //  for( auto it = files_.begin(); it != files_.end(); ++it){
+        //     if( it->getName() == name){
+        //        inSource_ = true;
+        //        std::cout<< "the file " << name << " is in the source folder. awesome!"<<std::endl;
+        //     }
+
+        //  }
+        //  if( !inSource_){
+        //     std::cout<< "the file " << name << " is not in the source folder"<<std::endl;
+        //     return false;
+        // }
+        //  else{
+        //     std::cout<< "checking if the file is in the destination folder already"<<std::endl;
+        //     bool inDestination_ = false;
+        //     for( auto it = destination.files_.begin(); it != destination.files_.end(); ++it){
+        //        if( it->getName() == name){
+        //           inDestination_ =true;
+        //        }
+        //     }
+        //     if( inDestination_){ 
+        //         std::cout<< "you already have this file in the destination" <<std::endl;
+        //         return false;
+        //     }
+        //     //object exists in the source file and the object is not in the destination file
+        //     else{
+               
+        //        // fileInSource_ represents the file, so we contain the file that we want to move from this files_ vector so now copy it to the destination files_ vector
+        //        std::cout<< "the file " << name << " is being added to the destination folder now"<<std::endl;
+               
+        //         // std::cout<<  fileInSource_.getName() <<std::endl;
+                
+        //     //    destination.files_.push_back( fileInSource_);
+        //        //this ^^^ line leads to a segmentation fault
+        //        return true;
+        //     }
+        //  }
+
+        //  return false;
             
         }
