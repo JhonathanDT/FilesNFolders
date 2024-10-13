@@ -100,19 +100,23 @@ size_t Folder::getSize(){
        * @return True if the file was added successfully. False otherwise.
        * @post If the file was added, leaves the parameter File object in a valid but unspecified state
        */
-bool Folder::addFile (File& new_file){
-   //we would need to use move constructor
-   //we will use move because it lets us "create a file" in the vector and that file created will be just the like the "new_file" File that we are being given.    
+bool Folder::addFile (File& new_file){ 
+   //check if the new file name is empty
+   if( new_file.getName() == ""){
+    return false;
+   }
    //check if a file with the same name as 'new file' exists inside the vector
-   for( auto it = files_.begin(); it != files_.end(); ++it) {
+   for( auto it = files_.begin(); it != files_.end(); ++it) {      
       if( it->getName() == new_file.getName()){
          return false;
       }
-   }
-      // the new_file file does not exist in the vector
-   files_.push_back( std::move(new_file) );
-   return true;
+   }   
+    // the new_file file does not exist in the vector
+    files_.push_back( std::move(new_file) );     
+    return true;
+    
 }
+
 /**
        * @brief Searches for a file within the files_ vector to be deleted.
        * If a file object with a matching name is found, erase it from the vector in linear [O(N)] time or better.
