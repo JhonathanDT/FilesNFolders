@@ -78,11 +78,10 @@ int main(){
   Folder first ( "HoldsEverything");
   // first.display();
   first.addFile(c);
-  std::cout<<"new added" << std::endl;
   first.addFile(g);
-  std::cout<<"new added" << std::endl;
-  bool haveIt =first.addFile(likeC);
-   std::cout<< haveIt << std::endl;
+  first.addFile(e);
+  std::cout<< "the size of the first folder should be 3 since it has 3 files; it is:" << first.getSize() << std::endl;
+  
   // first.addFile(e);
   // first.display();
 
