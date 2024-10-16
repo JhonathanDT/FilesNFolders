@@ -105,10 +105,10 @@ int main(){
 
 /* copyTo() */
   Folder second( "second");   
-  File cutie( "sabrina.carpenter");
-  second.addFile(cutie);
-  File cutie2( "sabrina.carpenter");
-  first.addFile(cutie2 );
+  File twin( "sab.car");
+  second.addFile(twin);
+  File twin2( "sab.car");
+  first.addFile(twin2 );
   first.display();
   second.display();
   first.copyFileTo("Empty.contents" , second);

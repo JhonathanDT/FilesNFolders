@@ -127,7 +127,7 @@ File::File(const File& other) : filename_{other.filename_}, contents_{other.cont
    for(int i = 0; i < ICON_DIM; i++){
       icon_[i] = other.icon_[i];
    }
-   // std::cout<< "Copy constructor invoked" << std::endl; 
+   std::cout<< "Copy constructor invoked" << std::endl; 
 }
 
 File& File::operator=( const File& other){
@@ -143,7 +143,7 @@ File& File::operator=( const File& other){
          icon_[i] = other.icon_[i];
       }
    }
-   // std::cout << "Copy assignment operator invoked" << std::endl;
+   std::cout << "Copy assignment operator invoked" << std::endl;
    return *this;
 }
 
@@ -153,7 +153,7 @@ File::File(File&& other) : filename_{other.filename_}, contents_{other.contents_
    other.icon_ = nullptr;
    other.filename_ = "";
    other.contents_ = "";
-   // std::cout << "Move constructor invoked" <<std::endl;
+   std::cout << "Move constructor invoked" <<std::endl;
 }
 
 File& File::operator=(File&& other){
@@ -169,7 +169,7 @@ File& File::operator=(File&& other){
       other.filename_ = "";
       other.contents_ = "";
    }
-   // std::cout << "Move assignment operator invoked" << std::endl;
+   std::cout << "Move assignment operator invoked" << std::endl;
    return *this;
 }
 

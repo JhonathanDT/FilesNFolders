@@ -204,57 +204,47 @@ bool Folder::removeFile(const std::string& filename){
       //    * @param destination The destination folder, as a reference to a Folder object
       //    * @return True if the file was copied successfully. False otherwise.
       //    */
-        bool Folder::copyFileTo(const std::string& name, Folder& destination ){
-         
-         if( name == ""){
-            std::cout<< "the file name is empty"<<std::endl;
-            return false;
-         }
-
-         if( this == &destination){
-            std::cout<< "silly the destination is the same as the main folder"<<std::endl;
-            return false;
-        }
-
-         bool inSource_ = false;
-
-        //  for( auto it = files_.begin(); it != files_.end(); ++it){
-        //     if( it->getName() == name){
-        //        inSource_ = true;
-        //        std::cout<< "the file " << name << " is in the source folder. awesome!"<<std::endl;
-        //     }
-
-        //  }
-        //  if( !inSource_){
-        //     std::cout<< "the file " << name << " is not in the source folder"<<std::endl;
-        //     return false;
-        // }
-        //  else{
-        //     std::cout<< "checking if the file is in the destination folder already"<<std::endl;
-        //     bool inDestination_ = false;
-        //     for( auto it = destination.files_.begin(); it != destination.files_.end(); ++it){
-        //        if( it->getName() == name){
-        //           inDestination_ =true;
-        //        }
-        //     }
-        //     if( inDestination_){ 
-        //         std::cout<< "you already have this file in the destination" <<std::endl;
-        //         return false;
-        //     }
-        //     //object exists in the source file and the object is not in the destination file
-        //     else{
-               
-        //        // fileInSource_ represents the file, so we contain the file that we want to move from this files_ vector so now copy it to the destination files_ vector
-        //        std::cout<< "the file " << name << " is being added to the destination folder now"<<std::endl;
-               
-        //         // std::cout<<  fileInSource_.getName() <<std::endl;
-                
-        //     //    destination.files_.push_back( fileInSource_);
-        //        //this ^^^ line leads to a segmentation fault
-        //        return true;
-        //     }
-        //  }
-
-        //  return false;
-            
+        bool Folder::copyFileTo(const std::string& name, Folder& destination ){ 
+            if( name == ""){
+                std::cout<< "the file name is empty"<<std::endl;
+                return false;
+            }
+            if( this == &destination){
+                std::cout<< "silly the destination is the same as the main folder"<<std::endl;
+                return false;
+            }
+            //check if it exists in the origin first
+            bool existsInOrigin = false;
+            for( auto it = files_.begin(); it != files_.end(); ++it){
+                //iterate through the origin's files vector if you find a name that matches the name given flip the bool
+                if( it->getName() == name){
+                    existsInOrigin = true;
+                    break;
+                }
+            }
+            //this means it does not exist in the Origin folder
+            if( !existsInOrigin){return false;}
+            else{
+                //now we will iterate through the destination to see if it exists there
+                bool existsInDestination = false;
+                for( auto it = destination.files_.begin(); it != destination.files_.end(); ++it){
+                    //iterate through the destination's files vector if you find a name that matches the name given flip the bool
+                    if( it->getName() == name){
+                        existsInDestination = true;
+                        break;
+                    }
+                }
+                if( existsInDestination){return false;} 
+            }
+            //now lets try to push back into the destination
+            bool push_backUsed = false;
+            for( auto it = files_.begin(); it != files_.end(); ++it){
+                //iterate through the origin's files vector if you find a name that matches the name given flip the bool
+                if( it->getName() == name){
+                    destination.files_.push_back(*it);
+                    push_backUsed = true;
+                    break;
+                }
+            }
+            return push_backUsed;
         }
